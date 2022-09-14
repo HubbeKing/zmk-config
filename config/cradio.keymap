@@ -56,7 +56,7 @@
         };
         combo_sys {
             timeout-ms = <100>;
-            key-positions = <30 31>;     // NAV+SPC
+            key-positions = <30 31>;    // NAV+SPC
             bindings = <&mo SYS>;
         };
         combo_acc {
@@ -87,9 +87,9 @@
             // |     |     |     |     |     |          |  1  |  2  |  3  |  0  |  =  |
             //                   | FUN | SYM |          |ENTER|     |
             bindings = <
-                &none &none &none &none   &none       &kp N7 &kp N8 &kp K9 &kp PLUS &kp MINUS
-                &none &none &none &none   &none       &kp N4 &kp N5 &kp N6 &kp STAR &kp FSLH
-                &none &none &none &none   &none       &kp N1 &kp N2 &kp N3 &kp N0   &kp EQUAL
+                &none &none &none &none   &none       &kp N7    &kp N8 &kp N9 &kp PLUS &kp MINUS
+                &none &none &none &none   &none       &kp N4    &kp N5 &kp N6 &kp STAR &kp FSLH
+                &none &none &none &none   &none       &kp N1    &kp N2 &kp N3 &kp N0   &kp EQUAL
                                   &mo FUN &mo SYM     &kp ENTER &none
             >;
         };
