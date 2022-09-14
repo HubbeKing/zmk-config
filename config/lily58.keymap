@@ -1,0 +1,99 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
+#define QWERTY 0
+#define GAMING 1
+#define LOWER  2
+#define RAISE  3
+#define SYSTEM 4
+
+&mt {
+    flavor = "tap-preferred";
+    tapping_term_ms = <200>;
+};
+
+/ {
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+        // G A S C      C S A G
+        //   A              A
+    };
+	keymap {
+		compatible = "zmk,keymap";
+		default_layer {
+            // --------------------------------------------------------------------------------------------------------------------
+            // |  Esc  |   1   |   2   |   3   |   4   |   5   |                   |   6   |   7   |   8   |   9   |   0   |   -   |
+            // |  Tab  |   Q   |   W   |   E   |   R   |   T   |                   |   Y   |   U   |   I   |   O   |   P   |   =   |
+            // | LCtrl |   A   |   S   |   D   |   F   |   G   |                   |   H   |   J   |   K   |   L   |   ;   |   '   |
+            // | LShft |   Z   |   X   |   C   |   V   |   B   |   [   |   |   ]   |   N   |   M   |   ,   |   .   |   /   | \ Shft|
+            //                         |  LALT | LGUI  | LOWER |  SPC  |   |  ENT  | RAISE | BKSPC |  DEL  |
+			bindings = <
+                &kp ESC   &kp N1     &kp N2     &kp N3      &kp N4      &kp N5                         &kp N6    &kp N7      &kp N8      &kp N9       &kp N0        &kp MINUS
+                &kp TAB   &kp Q      &kp W      &kp E       &kp R       &kp T                          &kp Y     &kp U       &kp I       &kp O        &kp P         &kp EQUAL
+                &kp LCTRL &hm LGUI A &hm LALT S &hm LSHFT D &hm LCTRL F &kp G                          &kp H     &hm RCTRL J &hm RSHFT K &hm LALT L   &hm RGUI SEMI &kp SQT
+                &kp LSHFT &kp Z      &hm RALT X &kp C       &kp V       &kp B     &kp LBKT    &kp RBKT &kp N     &kp M       &kp COMMA   &hm RALT DOT &kp FSLH      &mt RSHFT BSLH
+                                                &kp LALT    &kp LGUI    &mo LOWER &kp SPACE   &kp RET  &mo RAISE &kp BSPC    &kp DEL
+			>;
+		};
+		lower_layer {
+            // --------------------------------------------------------------------------------------------------------------------
+            // |   ~   |   !   |   @   |   #   |   $   |   %   |                   |   ^   |   &   |   *   |   (   |   )   |   _   |
+            // |  Tab  |   F1  |   F2  |   F3  |   F4  |   F5  |                   |       |       |       |       |   `   |   +   |
+            // | LCtrl |   F6  |   F7  |   F8  |   F9  |   F10 |                   |       |       |       |       |   :   |   "   |
+            // | LShft |   F11 |   F12 |       |       |       |   {   |   |   }   |       |       |   <   |   >   |   ?   |   |   |
+            //                         |  LALT | LGUI  | QWERTY|  SPC  |   |  ENT  |  SYS  | BKSPC |  DEL  |
+			bindings = <
+                &kp TILDE &kp EXCL &kp AT  &kp HASH &kp DOLLAR &kp PERCENT                     &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR  &kp UNDER
+                &kp TAB   &kp F1   &kp F2  &kp F3   &kp F4     &kp F5                          &none     &none    &none    &none    &kp GRAVE &kp PLUS
+                &kp LCTRL &kp F6   &kp F7  &kp F8   &kp F9     &kp F10                         &none     &none    &none    &none    &kp COLON &kp DQT
+                &kp LSHFT &kp F11  &kp F12 &none    &none      &none     &kp LBRC    &kp RBRC  &none     &none    &kp LT   &kp GT   &kp QMARK &kp PIPE
+                                           &kp LALT &kp LGUI   &mo LOWER &kp SPACE   &kp RET   &mo RAISE &kp BSPC &kp DEL
+			>;
+		};
+		raise_layer {
+            // --------------------------------------------------------------------------------------------------------------------
+            // |  Esc  |   F1  |   F2  |   F3  |   F4  |   F5  |                   |   F6  |   F7  |   F8  |   F9  |  F10  |  F11  |
+            // |  Tab  |       |       |       |       |       |                   |  PgUp |       |   Up  |       |       |  F12  |
+            // | LCtrl | LGUI  | LALT  | LShft | LCtrl |       |                   |  PgDn | Left  |  Down | Right |       |       |
+            // | LShft |       | RALT  |       |       |       |   [   |   |   ]   |       | Home  |       |  End  |       |       |
+            //                         |  LALT | LGUI  | LOWER |  SPC  |   |  ENT  | RAISE | BKSPC |  DEL  |
+            bindings = <
+                &kp ESC   &kp F1   &kp F2   &kp F3    &kp F4    &kp F5                          &kp F6     &kp F7   &kp F8   &kp F9    &kp F10 &kp F11
+                &kp TAB   &none    &none    &none     &none     &none                           &kp PG_UP  &none    &kp UP   &none     &none   &kp F12
+                &kp LCTRL &kp LGUI &kp LALT &kp LSHFT &kp LCTRL &none                           &kp PG_DN  &kp LEFT &kp DOWN &kp RIGHT &none   &none
+                &kp LSHFT &none    &kp RALT &none     &none     &none     &kp LBKT    &kp RBKT  &none      &kp HOME &none    &kp END   &none   &none
+                                            &kp LALT  &kp LGUI  &mo LOWER &kp SPACE   &kp ENTER &mo RAISE  &kp BSPC &kp DEL
+            >;
+		};
+        system_layer {
+            // --------------------------------------------------------------------------------------------------------------------
+            // | BOOTL | BT_0  | BT_1  | BT_2  |       | RESET |                   | BOOTL |       |       |       |       | RESET |
+            // |       |       |       |       |       |       |                   |       |       |       |       |       |       |
+            // |       | BT_PRV|       | BT_NXT|       | BT_CLR|                   |       |       |       |       |       |       |
+            // |       |       |       |       |       |       |   [   |   |   ]   |       |       |       |       |       |       |
+            //                         |  LALT | LGUI  | LOWER |  SPC  |   |  ENT  | RAISE | BKSPC |  DEL  |
+            bindings = <
+                &bootloader &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &none     &reset                           &bootloader &none    &none &none &none &reset
+                &none       &none        &none        &none        &none     &none                            &none       &none    &none &none &none &none
+                &none       &bt BT_PRV   &none        &bt BT_NXT   &none     &bt BT_CLR                       &none       &none    &none &none &none &none
+                &none       &none        &none        &none        &none     &none      &kp LBKT    &kp RBKT  &none       &none    &none &none &none &none
+                                                      &kp LALT     &kp LGUI  &mo LOWER  &kp SPACE   &kp ENTER &mo RAISE   &kp BSPC &kp DEL
+            >;
+        };
+	};
+};
