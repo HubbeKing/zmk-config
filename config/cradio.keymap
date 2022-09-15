@@ -96,13 +96,13 @@
         symbols_layer {
             // ------------------------------------------------------------------------
             // |  !  |  @  |  #  |  $  |  %  |          |  ^  |  &  |  *  |  (  |  )  |
-            // |  ?  |  `  |     |     |     |          |  -  |  =  |  ~  |  [  |  ]  |
-            // |     |     |     |     |     |          |  ;  |  /  |  \  |  {  |  }  |
+            // |  ?  |  `  |     |     |  ;  |          |  -  |  =  |  ~  |  [  |  ]  |
+            // |  |  |     |     |     |  :  |          |  +  |  /  |  \  |  {  |  }  |
             //                   |     |SPACE|          |ENTER|     |
             bindings = <
                 &kp EXCL  &kp AT    &kp HASH &kp DOLLAR &kp PERCENT     &kp CARET &kp AMPS  &kp STAR  &kp LPAR &kp RPAR
-                &kp QMARK &kp GRAVE &none    &none      &none           &kp MINUS &kp EQUAL &kp TILDE &kp LBKT &kp RBKT
-                &none     &none     &none    &none      &none           &kp SEMI  &kp SLASH &kp BSLH  &kp LBRC &kp RBRC
+                &kp QMARK &kp GRAVE &none    &none      &kp SEMI        &kp MINUS &kp EQUAL &kp TILDE &kp LBKT &kp RBKT
+                &kp PIPE  &none     &none    &none      &kp COLON       &kp PLUS  &kp SLASH &kp BSLH  &kp LBRC &kp RBRC
                                              &none      &kp SPACE       &kp ENTER &none
             >;
         };
