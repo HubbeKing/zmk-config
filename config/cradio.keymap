@@ -82,14 +82,14 @@
         };
         numbers_layer {
             // ------------------------------------------------------------------------
-            // |     |     |     |     |     |          |  7  |  8  |  9  |  +  |  -  |
-            // |     |     |     |     |     |          |  4  |  5  |  6  |  *  |  /  |
-            // |     |     |     |     |     |          |  1  |  2  |  3  |  0  |  =  |
+            // |     |     |     |     |     |          |  /  |  7  |  8  |  9  |  -  |
+            // |     |     |     |     |     |          |  *  |  4  |  5  |  6  |  +  |
+            // |     |     |     |     |     |          |  0  |  1  |  2  |  3  |  =  |
             //                   | FUN | SYM |          |ENTER|     |
             bindings = <
-                &none &none &none &none   &none       &kp N7    &kp N8 &kp N9 &kp PLUS &kp MINUS
-                &none &none &none &none   &none       &kp N4    &kp N5 &kp N6 &kp STAR &kp FSLH
-                &none &none &none &none   &none       &kp N1    &kp N2 &kp N3 &kp N0   &kp EQUAL
+                &none &none &none &none   &none       &kp FSLH  &kp N7 &kp N8 &kp N9 &kp MINUS
+                &none &none &none &none   &none       &kp STAR  &kp N4 &kp N5 &kp N6 &kp PLUS
+                &none &none &none &none   &none       &kp N0    &kp N1 &kp N2 &kp N3 &kp EQUAL
                                   &mo FUN &mo SYM     &kp ENTER &none
             >;
         };
