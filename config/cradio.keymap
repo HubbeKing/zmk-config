@@ -7,29 +7,48 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/ext_power.h>
+#include <dt-bindings/zmk/outputs.h>
 
-#define DEF 0
-#define NUM 1
-#define SYM 2
-#define ACC 3
-#define NAV 4
-#define FUN 5
-#define SYS 6
-
-
-&mt {
-    flavor = "tap-preferred";
-    tapping_term_ms = <200>;
-};
-
-&sk {
-    release-after-ms = <2000>;
-    //quick-release;
-};
+#define BASE 0
+#define NAV  1
+#define NUM  2
+#define SYM  3
+#define FUN  4
+#define SYS  5
 
 / {
     behaviors {
+        // Miryoku shift macros:
+        // shift + BT_X -> &bt BT_SEL X &bt BT_CLR
+        bt_sel_0: bt_sel_clr_0 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BT_SEL_OR_CLEAR_0";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>, <&macro_bt_clr_0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        bt_sel_1: bt_sel_clr_1 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BT_SEL_OR_CLEAR_1";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1>, <&macro_bt_clr_1>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        bt_sel_2: bt_sel_clr_2 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BT_SEL_OR_CLEAR_2";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 2>, <&macro_bt_clr_2>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        bt_sel_3: bt_sel_clr_3 {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BT_SEL_OR_CLEAR_3";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 3>, <&macro_bt_clr_3>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // Homerow modifiers
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
@@ -44,118 +63,158 @@
     };
     combos {
         compatible = "zmk,combos";
-        combo_esc {
-            timeout-ms = <100>;
-            key-positions = <0 1>;      // Q + W
-            bindings = <&kp ESC>;
+        combo_lt_base {
+            // Left thumb: BASE, &lt SYS Esc
+            timeout-ms = <50>;
+            key-positions = <30 31>;
+            layers = <BASE>;
+            bindings = <&lt SYS ESC>;
         };
-        combo_tab {
-            timeout-ms = <100>;
-            key-positions = <10 11>;    // A + S
-            bindings = <&kp TAB>;
+        combo_lt_num {
+            // Left thumb: NUM - .
+            timeout-ms = <50>;
+            key-positions = <30 31>;
+            layers = <NUM>;
+            bindings = <&kp DOT>;
         };
-        combo_sys {
-            timeout-ms = <100>;
-            key-positions = <30 31>;    // NAV+SPC
-            bindings = <&mo SYS>;
+        combo_lt_sym {
+            // Left thumb: SYM - (
+            timeout-ms = <50>;
+            key-positions = <30 31>;
+            layers = <NUM>;
+            bindings = <&kp LEFT_PARENTHESIS>;
         };
-        combo_acc {
-            timeout-ms = <100>;
-            key-positions = <32 33>;    // ENT+NUM
-            bindings = <&mo ACC>;
+        combo_lt_fun {
+            // Left thumb: FUN - "application"
+            timeout-ms = <50>;
+            key-positions = <30 31>;
+            layers = <FUN>;
+            bindings = <&kp K_APPLICATION>;
         };
+        combo_rt_base {
+            // Right thumb: BASE, &lt FUN Del
+            timeout-ms = <50>;
+            key-positions = <32 33>;
+            layers = <BASE>;
+            bindings = <&lt FUN DELETE>;
+        };
+        combo_rt_nav {
+            // Right thumb: NAV - Delete
+            timeout-ms = <50>;
+            key-positions = <32 33>;
+            layers = <NAV>;
+            bindings = <&kp DELETE>;
+        };
+    };
+    macros {
+        // Miryoku shift macros:
+        // shift + BT_X -> &bt BT_SEL X &bt BT_CLR
+        macro_bt_clr_0: macro_bt_clr_0 {
+            label = "ma_bt_clear_0";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>, <&bt BT_CLR>;
+        }
+        macro_bt_clr_1: macro_bt_clr_2 {
+            label = "ma_bt_clear_1";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1>, <&bt BT_CLR>;
+        }
+        macro_bt_clr_2: macro_bt_clr_2 {
+            label = "ma_bt_clear_2";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 2>, <&bt BT_CLR>;
+        }
+        macro_bt_clr_3: macro_bt_clr_3 {
+            label = "ma_bt_clear_3";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
+        }
     };
     keymap {
         compatible = "zmk,keymap";
-        default_layer {
+        miryoku_base {
             // ------------------------------------------------------------------------
             // |  Q  |  W  |  E  |  R  |  T  |          |  Y  |  U  |  I  |  O  |  P  |
             // |  A  |  S  |  D  |  F  |  G  |          |  H  |  J  |  K  |  L  |  '  |
             // |  Z  |  X  |  C  |  V  |  B  |          |  N  |  M  |  ,  |  .  |  /  |
-            //                   | NAV |SPACE|          |ENTER| NUM |
+            //                   |SPACE| Tab |          |ENTER|BkSpc|
+            //                    (NAV)                  (SYM) (NUM)
+            //                        Esc                    Del
+            //                       (SYS)                  (FUN)
             bindings = <
-                &kp Q       &kp W      &kp E      &kp R      &kp T         &kp Y     &kp U      &kp I      &kp O        &kp P
-                &hm LGUI A  &hm LALT S &hm LSFT D &hm LCTL F &kp G         &kp H     &hm RCTL J &hm RSFT K &hm LALT L   &hm RGUI QUOT
-                &mt LSHFT Z &hm RALT X &kp C      &kp V      &kp B         &kp N     &kp M      &kp COMMA  &hm RALT DOT &mt RSHFT SLASH
-                                                  &mo NAV    &kp SPACE     &kp ENTER &mo NUM
+                &kp Q      &kp W      &kp E       &kp R         &kp T                 &kp Y         &kp U       &kp I       &kp O        &kp P
+                &hm LGUI A &hm LALT S &hm LSHFT D &hm LCTRL F   &kp G                 &kp H         &hm RCTRL J &hm RSHFT K &hm LALT L   &hm RGUI QUOT
+                &kp Z      &hm RALT X &kp C       &kp V         &kp B                 &kp N         &kp M       &kp COMMA   &hm RALT DOT &kp FSLH
+                                                  &lt NAV SPACE &kp TAB               &lt SYM ENTER &lt NUM BACKSPACE
             >;
         };
-        numbers_layer {
+        miryoku_nav {
             // ------------------------------------------------------------------------
-            // |     |     |     |     |     |          |  /  |  7  |  8  |  9  |  -  |
-            // |     |     |     |     |     |          |  *  |  4  |  5  |  6  |  +  |
-            // |     |     |     |     |     |          |  0  |  1  |  2  |  3  |  =  |
-            //                   | FUN | SYM |          |ENTER|     |
+            // |     |     |     |     |     |          | Ins |Home |  Up | End |PgUp |
+            // |LGUI |LAlt |LShft|LCtrl|     |          |CapsL|Left |Down |Right|PgDn |
+            // |     |RAlt |     |     |     |          |Redo |Paste|Copy | Cut |Undo |
+            //                   |     |     |          |ENTER|BkSpc|
             bindings = <
-                &none &none &none &none   &none       &kp FSLH  &kp N7 &kp N8 &kp N9 &kp MINUS
-                &none &none &none &none   &none       &kp STAR  &kp N4 &kp N5 &kp N6 &kp PLUS
-                &none &none &none &none   &none       &kp N0    &kp N1 &kp N2 &kp N3 &kp EQUAL
-                                  &mo FUN &mo SYM     &kp ENTER &none
+                &none    &none    &none     &none     &none             &kp INSERT   &kp HOME    &kp UP     &kp END   &kp PAGE_UP
+                &kp LGUI &kp LALT &kp LSHFT &kp LCTRL &none             &kp CAPSLOCK &kp LEFT    &kp DOWN   &kp RIGHT &kp PAGE_DOWN
+                &none    &kp RALT &none     &none     &none             &kp K_REDO   &kp K_PASTE &kp K_COPY &kp K_CUT &kp K_UNDO
+                                            &none     &none             &kp ENTER    &kp BACKSPACE
             >;
         };
-        symbols_layer {
+        miryoku_num {
             // ------------------------------------------------------------------------
-            // |  !  |  @  |  #  |  $  |  %  |          |  ^  |  &  |  *  |  (  |  )  |
-            // |  ?  |  `  |     |     |  ;  |          |  -  |  =  |  ~  |  [  |  ]  |
-            // |  |  |     |     |     |  :  |          |  +  |  /  |  \  |  {  |  }  |
-            //                   |     |SPACE|          |ENTER|     |
+            // |  [  |  7  |  8  |  9  |  ]  |          |     |     |     |     |     |
+            // |  ;  |  4  |  5  |  6  |  =  |          |     |RCtrl|RShft|LAlt |RGUI |
+            // |  `  |  1  |  2  |  3  |  \  |          |     |     |     |RAlt |     |
+            //                   |  0  |  -  |          |     |     |
             bindings = <
-                &kp EXCL  &kp AT    &kp HASH &kp DOLLAR &kp PERCENT     &kp CARET &kp AMPS  &kp STAR  &kp LPAR &kp RPAR
-                &kp QMARK &kp GRAVE &none    &none      &kp SEMI        &kp MINUS &kp EQUAL &kp TILDE &kp LBKT &kp RBKT
-                &kp PIPE  &none     &none    &none      &kp COLON       &kp PLUS  &kp SLASH &kp BSLH  &kp LBRC &kp RBRC
-                                             &none      &kp SPACE       &kp ENTER &none
+                &kp LBKT  &kp N7 &kp N8 &kp N9 &kp RBKT             &none &none     &none     &none    &none
+                &kp SEMI  &kp N4 &kp N5 &kp N6 &kp EQUAL            &none &kp RCTRL &kp RSHFT &kp LALT &kp RGUI
+                &kp GRAVE &kp N1 &kp N2 &kp N3 &kp BSLH             &none &none     &none     &kp RALT &none
+                                        &kp N0 &kp MINUS            &none &none
             >;
         };
-        accents_layer {
+        miryoku_sym {
             // ------------------------------------------------------------------------
-            // |     |  Å  |  €  |     |     |          |     |     |     |  Ö  |     |
-            // |  Ä  |     |     |     |  £  |          |     |     |     |     |     |
-            // |     |     |     |     |     |          |     |     |     |     |     |
-            //                   |     |SPACE|          |ENTER| FUN |
+            // |  {  |  &  |  *  |  (  |  }  |          |     |     |     |     |     |
+            // |  :  |  $  |  %  |  ^  |  +  |          |     |RCtrl|RShft|LAlt |RGUI |
+            // |  ~  |  !  |  @  |  #  |  |  |          |     |     |     |RAlt |     |
+            //                   |  )  |  _  |          |     |     |
             bindings = <
-                &none     &kp RA(W) &kp RA(N5) &none &none           &none     &none   &none &kp RA(O) &none
-                &kp RA(A) &none     &none      &none &kp RA(N4)      &none     &none   &none &none     &none
-                &none     &none     &none      &none &none           &none     &none   &none &none     &none
-                                               &none &kp SPACE       &kp ENTER &mo FUN
+                &kp LBRC  &kp AMPS   &kp STAR    &kp LPAR  &kp RBRC             &none &none     &none     &none    &none
+                &kp COLON &kp DOLLAR &kp PERCENT &kp CARET &kp PLUS             &none &kp RCTRL &kp RSHFT &kp LALT &kp RGUI
+                &kp TILDE &kp EXCL   &kp AT_SIGN &kp HASH  &kp PIPE             &none &none     &none     &kp RALT &none
+                                                 &kp RPAR  &kp UNDERSCORE       &none &none
             >;
         };
-        navigation_layer {
+        miryoku_fun {
             // ------------------------------------------------------------------------
-            // | Tab |     |     |     |     |          | PgUp| Home|  Up | End |     |
-            // | Esc |LGUI |LAlt |LShft|LCtrl|          | PgDn| Left| Down|Right|     |  NOTE: Sticky modifiers (one-shot mods)
-            // | Shft|     |RAlt |     |     |          |     | BkSp|     | Del |     |
-            //                   |     |SPACE|          |ENTER|     |
+            // | F12 | F7  | F8  | F9  |PrnSc|          |     |     |     |     |     |
+            // | F11 | F4  | F5  | F6  |ScrLK|          |     |RCtrl|RShft|LAlt |RGUI |
+            // | F10 | F1  | F2  | F3  |Pause|          |     |     |     |RAlt |     |
+            //                   |SPACE| Tab |          |     |     |
             bindings = <
-                &kp TAB   &none    &none    &none     &none            &kp PG_UP &kp HOME &kp UP   &kp END   &none
-                &gresc    &sk LGUI &sk LALT &sk LSHFT &sk LCTRL        &kp PG_DN &kp LEFT &kp DOWN &kp RIGHT &none
-                &kp LSHFT &none    &sk RALT &none     &none            &none     &kp BSPC &none    &kp DEL   &none
-                                            &none     &kp SPACE        &kp ENTER &none
+                &kp F12 &kp F7 &kp F8 &kp F9    &kp PRINTSCREEN             &none &none     &none     &none    &none
+                &kp F11 &kp F4 &kp F5 &kp F6    &kp SCROLLLOCK              &none &kp RCTRL &kp RSHFT &kp LALT &kp RGUI
+                &kp F10 &kp F1 &kp F2 &kp F3    &kp PAUSE_BREAK             &none &none     &none     &kp RALT &none
+                                      &kp SPACE &kp TAB                     &none &none
             >;
         };
-        function_layer {
+        miryoku_sys {
             // ------------------------------------------------------------------------
-            // | F1  | F2  | F3  | F4  | F5  |          | F6  | F7  | F8  | F9  | F10 |
-            // |     |PrntS|     |     |     |          |     |     |     |     | F11 |
-            // |     |     |     |     |     |          |     |     |     |     | F12 |
-            //                   |     |SPACE|          |ENTER|     |
+            // |RESET|     |     |     |BOOTL|          |BOOTL|     |     |     |RESET|
+            // |LGUI |LAlt |LShft|LCtrl|     |          |OUT_U|     |     |     |     |
+            // |     |RAlt |     |     |     |          |OUT_B|BT_0 |BT_1 |BT_2 |BT_3 |
+            //                   |     |     |          |     |     |
             bindings = <
-                &kp F1 &kp F2    &kp F3 &kp F4 &kp F5           &kp F6    &kp F7 &kp F8 &kp F9 &kp F10
-                &none  &kp PSCRN &none  &none  &none            &none     &none  &none  &none  &kp F11
-                &none  &none     &none  &none  &none            &none     &none  &none  &none  &kp F12
-                                        &none  &kp SPACE        &kp ENTER &none
-            >;
-        };
-        system_layer {
-            // ------------------------------------------------------------------------
-            // |BOOTL|     |     |BT_CL| BT0 |          | BT3 |     |     |     |BOOTL|
-            // |     |     |EP_TG|     | BT1 |          | BT4 |     |     |     |     |
-            // |RESET|     |     |     | BT2 |          | BT5 |     |     |     |RESET|
-            //                   |     |SPACE|          |ENTER|     |
-            bindings = <
-                &bootloader &none &none             &bt BT_CLR &bt BT_SEL 0         &bt BT_SEL 3 &none &none &none &bootloader
-                &none       &none &ext_power EP_TOG &none      &bt BT_SEL 1         &bt BT_SEL 4 &none &none &none &none
-                &reset      &none &none             &none      &bt BT_SEL 2         &bt BT_SEL 5 &none &none &none &reset
-                                                    &none      &kp SPACE            &kp ENTER    &none
+                &reset   &none    &none     &none     &bootloader               &bootloader  &none     &none     &none     &reset
+                &kp LGUI &kp LALT &kp LSHFT &kp LCTRL &none                     &out OUT_USB &none     &none     &none     &none
+                &none    &kp RALT &none     &none     &none                     &out OUT_BLE &bt_sel_0 &bt_sel_1 &bt_sel_2 &bt_sel_3
+                                            &none     &none                     &none        &none
             >;
         };
     };
