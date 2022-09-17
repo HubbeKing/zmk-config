@@ -114,25 +114,25 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&bt BT_SEL 0>, <&bt BT_CLR>;
-        }
+        };
         macro_bt_clr_1: macro_bt_clr_2 {
             label = "ma_bt_clear_1";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&bt BT_SEL 1>, <&bt BT_CLR>;
-        }
+        };
         macro_bt_clr_2: macro_bt_clr_2 {
             label = "ma_bt_clear_2";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&bt BT_SEL 2>, <&bt BT_CLR>;
-        }
+        };
         macro_bt_clr_3: macro_bt_clr_3 {
             label = "ma_bt_clear_3";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&bt BT_SEL 3>, <&bt BT_CLR>;
-        }
+        };
     };
     keymap {
         compatible = "zmk,keymap";
