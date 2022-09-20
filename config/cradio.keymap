@@ -154,67 +154,67 @@
         };
         miryoku_nav {
             // ------------------------------------------------------------------------
-            // |     |     |     |     |     |          | Ins |Home |  Up | End |PgUp |
+            // |BOOTL|     |     |BASE |     |          | Ins |Home |  Up | End |PgUp |
             // |LGUI |LAlt |LShft|LCtrl|     |          |CapsL|Left |Down |Right|PgDn |
-            // |     |RAlt |     |     |     |          |Redo |Paste|Copy | Cut |Undo |
+            // |     |RAlt | SYM | NAV |     |          |Redo |Paste|Copy | Cut |Undo |
             //                   |     |     |          |ENTER|BkSpc|
             bindings = <
-                &none    &none    &none     &none     &none             &kp INSERT   &kp HOME    &kp UP     &kp END   &kp PAGE_UP
-                &kp LGUI &kp LALT &kp LSHFT &kp LCTRL &none             &kp CAPSLOCK &kp LEFT    &kp DOWN   &kp RIGHT &kp PAGE_DOWN
-                &none    &kp RALT &none     &none     &none             &kp K_REDO   &kp K_PASTE &kp K_COPY &kp K_CUT &kp K_UNDO
-                                            &none     &none             &kp ENTER    &kp BACKSPACE
+                &bootloader &none    &none     &to BASE  &none             &kp INSERT   &kp HOME    &kp UP     &kp END   &kp PAGE_UP
+                &kp LGUI    &kp LALT &kp LSHFT &kp LCTRL &none             &kp CAPSLOCK &kp LEFT    &kp DOWN   &kp RIGHT &kp PAGE_DOWN
+                &none       &kp RALT &to SYM   &to NAV   &none             &kp K_REDO   &kp K_PASTE &kp K_COPY &kp K_CUT &kp K_UNDO
+                                               &none     &none             &kp ENTER    &kp BACKSPACE
             >;
         };
         miryoku_num {
             // ------------------------------------------------------------------------
-            // |  [  |  7  |  8  |  9  |  ]  |          |     |     |     |     |     |
+            // |  [  |  7  |  8  |  9  |  ]  |          |     |BASE |     |     |BOOTL|
             // |  ;  |  4  |  5  |  6  |  =  |          |     |RCtrl|RShft|LAlt |RGUI |
-            // |  `  |  1  |  2  |  3  |  \  |          |     |     |     |RAlt |     |
+            // |  `  |  1  |  2  |  3  |  \  |          |     | NUM |     |RAlt |     |
             //                   |  0  |  -  |          |     |     |
             bindings = <
-                &kp LBKT  &kp N7 &kp N8 &kp N9 &kp RBKT             &none &none     &none     &none    &none
+                &kp LBKT  &kp N7 &kp N8 &kp N9 &kp RBKT             &none &to BASE  &none     &none    &bootloader
                 &kp SEMI  &kp N4 &kp N5 &kp N6 &kp EQUAL            &none &kp RCTRL &kp RSHFT &kp LALT &kp RGUI
-                &kp GRAVE &kp N1 &kp N2 &kp N3 &kp BSLH             &none &none     &none     &kp RALT &none
+                &kp GRAVE &kp N1 &kp N2 &kp N3 &kp BSLH             &none &to NUM   &none     &kp RALT &none
                                         &kp N0 &kp MINUS            &none &none
             >;
         };
         miryoku_sym {
             // ------------------------------------------------------------------------
-            // |  {  |  &  |  *  |  (  |  }  |          |     |     |     |     |     |
+            // |  {  |  &  |  *  |  (  |  }  |          |     |BASE |     |     |BOOTL|
             // |  :  |  $  |  %  |  ^  |  +  |          |     |RCtrl|RShft|LAlt |RGUI |
-            // |  ~  |  !  |  @  |  #  |  |  |          |     |     |     |RAlt |     |
+            // |  ~  |  !  |  @  |  #  |  |  |          |     | SYM | NAV |RAlt |     |
             //                   |  )  |  _  |          |     |     |
             bindings = <
-                &kp LBRC  &kp AMPS   &kp STAR    &kp LPAR  &kp RBRC             &none &none     &none     &none    &none
+                &kp LBRC  &kp AMPS   &kp STAR    &kp LPAR  &kp RBRC             &none &to BASE  &none     &none    &bootloader
                 &kp COLON &kp DOLLAR &kp PERCENT &kp CARET &kp PLUS             &none &kp RCTRL &kp RSHFT &kp LALT &kp RGUI
-                &kp TILDE &kp EXCL   &kp AT_SIGN &kp HASH  &kp PIPE             &none &none     &none     &kp RALT &none
+                &kp TILDE &kp EXCL   &kp AT_SIGN &kp HASH  &kp PIPE             &none &to SYM   &to NAV   &kp RALT &none
                                                  &kp RPAR  &kp UNDERSCORE       &none &none
             >;
         };
         miryoku_fun {
             // ------------------------------------------------------------------------
-            // | F12 | F7  | F8  | F9  |PrnSc|          |     |     |     |     |     |
+            // | F12 | F7  | F8  | F9  |PrnSc|          |     |BASE |     |     |BOOTL|
             // | F11 | F4  | F5  | F6  |ScrLK|          |     |RCtrl|RShft|LAlt |RGUI |
-            // | F10 | F1  | F2  | F3  |Pause|          |     |     |     |RAlt |     |
+            // | F10 | F1  | F2  | F3  |Pause|          |     | FUN | SYS |RAlt |     |
             //                   | Tab |SPACE|          |     |     |
             bindings = <
-                &kp F12 &kp F7 &kp F8 &kp F9    &kp PRINTSCREEN             &none &none     &none     &none    &none
+                &kp F12 &kp F7 &kp F8 &kp F9    &kp PRINTSCREEN             &none &to BASE  &none     &none    &bootloader
                 &kp F11 &kp F4 &kp F5 &kp F6    &kp SCROLLLOCK              &none &kp RCTRL &kp RSHFT &kp LALT &kp RGUI
-                &kp F10 &kp F1 &kp F2 &kp F3    &kp PAUSE_BREAK             &none &none     &none     &kp RALT &none
+                &kp F10 &kp F1 &kp F2 &kp F3    &kp PAUSE_BREAK             &none &to FUN   &to SYS   &kp RALT &none
                                       &kp TAB   &kp SPACE                   &none &none
             >;
         };
         miryoku_sys {
             // ------------------------------------------------------------------------
-            // |RESET|     |     |     |BOOTL|          |BOOTL|     |     |     |RESET|
+            // |BOOTL|     |     |BASE |     |          |     |     |     |     |BOOTL|
             // |LGUI |LAlt |LShft|LCtrl|     |          |OUT_U|     |     |     |     |
-            // |     |RAlt |     |     |     |          |OUT_B|BT_0 |BT_1 |BT_2 |BT_3 |
+            // |     |RAlt | FUN | SYS |     |          |OUT_B|BT_0 |BT_1 |BT_2 |BT_3 |
             //                   |     |     |          |     |     |
             bindings = <
-                &reset   &none    &none     &none     &bootloader               &bootloader  &none     &none     &none     &reset
-                &kp LGUI &kp LALT &kp LSHFT &kp LCTRL &none                     &out OUT_USB &none     &none     &none     &none
-                &none    &kp RALT &none     &none     &none                     &out OUT_BLE &bt_sel_0 &bt_sel_1 &bt_sel_2 &bt_sel_3
-                                            &none     &none                     &none        &none
+                &bootloader &none    &none     &to BASE  &none                     &none        &none     &none     &none     &bootloader
+                &kp LGUI    &kp LALT &kp LSHFT &kp LCTRL &none                     &out OUT_USB &none     &none     &none     &none
+                &none       &kp RALT &to FUN   &to SYS   &none                     &out OUT_BLE &bt_sel_0 &bt_sel_1 &bt_sel_2 &bt_sel_3
+                                               &none     &none                     &none        &none
             >;
         };
     };
