@@ -141,15 +141,15 @@
             // |  Q  |  W  |  E  |  R  |  T  |          |  Y  |  U  |  I  |  O  |  P  |
             // |  A  |  S  |  D  |  F  |  G  |          |  H  |  J  |  K  |  L  |  '  |
             // |  Z  |  X  |  C  |  V  |  B  |          |  N  |  M  |  ,  |  .  |  /  |
-            //                   |SPACE| Tab |          |ENTER|BkSpc|
-            //                    (NAV)                  (SYM) (NUM)
+            //                   | Tab |SPACE|          |ENTER|BkSpc|
+            //                          (NAV)            (SYM) (NUM)
             //                        Esc                    Del
             //                       (SYS)                  (FUN)
             bindings = <
                 &kp Q      &kp W      &kp E       &kp R         &kp T                 &kp Y         &kp U       &kp I       &kp O        &kp P
                 &hm LGUI A &hm LALT S &hm LSHFT D &hm LCTRL F   &kp G                 &kp H         &hm RCTRL J &hm RSHFT K &hm LALT L   &hm RGUI QUOT
                 &kp Z      &hm RALT X &kp C       &kp V         &kp B                 &kp N         &kp M       &kp COMMA   &hm RALT DOT &kp FSLH
-                                                  &lt NAV SPACE &kp TAB               &lt SYM ENTER &lt NUM BACKSPACE
+                                                  &kp TAB       &lt NAV SPACE         &lt SYM ENTER &lt NUM BACKSPACE
             >;
         };
         miryoku_nav {
@@ -196,12 +196,12 @@
             // | F12 | F7  | F8  | F9  |PrnSc|          |     |     |     |     |     |
             // | F11 | F4  | F5  | F6  |ScrLK|          |     |RCtrl|RShft|LAlt |RGUI |
             // | F10 | F1  | F2  | F3  |Pause|          |     |     |     |RAlt |     |
-            //                   |SPACE| Tab |          |     |     |
+            //                   | Tab |SPACE|          |     |     |
             bindings = <
                 &kp F12 &kp F7 &kp F8 &kp F9    &kp PRINTSCREEN             &none &none     &none     &none    &none
                 &kp F11 &kp F4 &kp F5 &kp F6    &kp SCROLLLOCK              &none &kp RCTRL &kp RSHFT &kp LALT &kp RGUI
                 &kp F10 &kp F1 &kp F2 &kp F3    &kp PAUSE_BREAK             &none &none     &none     &kp RALT &none
-                                      &kp SPACE &kp TAB                     &none &none
+                                      &kp TAB   &kp SPACE                   &none &none
             >;
         };
         miryoku_sys {
